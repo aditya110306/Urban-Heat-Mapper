@@ -1,0 +1,222 @@
+{
+  "analysis_scope": "Nashik District, Maharashtra, India",
+  "sample_size_h3_cells": 3254,
+  "target_variable": "Landsat Collection 2 Level-2 Peak Summer LST (\u00b0C)",
+  "drivers": [
+    {
+      "variable": "Impervious Built-Up Area (%)",
+      "source": "GHSL & OpenStreetMap",
+      "pearson_r": 0.398,
+      "association_direction": "Strong Positive",
+      "p_value": "< 0.001",
+      "interpretation": "Strong statistical association: High density impervious surfaces (asphalt, concrete, galvanized sheet roofing in industrial MIDC zones) strongly correlate with elevated Land Surface Temperature due to low albedo and high thermal mass."
+    },
+    {
+      "variable": "Normalized Difference Vegetation Index (NDVI)",
+      "source": "Sentinel-2 L2A 10m",
+      "pearson_r": -0.846,
+      "association_direction": "Strong Negative",
+      "p_value": "< 0.001",
+      "interpretation": "Vegetation provides significant evaporative cooling and shading. Cells with dense canopy (Western Ghats, orchards, vineyards) maintain 4\u00b0C - 8\u00b0C cooler surface temperatures compared to bare/built areas."
+    },
+    {
+      "variable": "Elevation (meters ASL)",
+      "source": "Copernicus GLO-30 DEM",
+      "pearson_r": -0.889,
+      "association_direction": "Moderate Negative",
+      "p_value": "< 0.001",
+      "interpretation": "Topographic lapse rate: Higher elevation highlands in Igatpuri and Trimbakeshwar (>800m) consistently exhibit lower radiant surface temperatures than lower-elevation plains in Malegaon (<450m)."
+    },
+    {
+      "variable": "Distance to Water Bodies (km)",
+      "source": "National Water Informatics Centre / OSM Waterways",
+      "pearson_r": 0.498,
+      "association_direction": "Moderate Positive",
+      "p_value": "< 0.001",
+      "interpretation": "Cells within 1 km of major reservoirs (Gangapur, Darna, Mukane) and the Godavari River benefit from localized microclimatic evaporative cooling buffers."
+    },
+    {
+      "variable": "Population Density (persons/km\u00b2)",
+      "source": "WorldPop / Census India Projection",
+      "pearson_r": 0.298,
+      "association_direction": "Moderate Positive",
+      "p_value": "< 0.001",
+      "interpretation": "Densely populated neighborhoods concentrate human activities, HVAC exhaust, and compact building mass, correlating with localized heat hotspots."
+    },
+    {
+      "variable": "IMD Gridded Air Temperature (\u00b0C)",
+      "source": "India Meteorological Department (0.25\u00b0 Grid)",
+      "pearson_r": 0.883,
+      "association_direction": "Moderate Positive (Coarse Regional Grid)",
+      "p_value": "< 0.001",
+      "interpretation": "Regional air temperature tracks broad macroclimatic trends, but cannot resolve micro-scale urban heat islands. Radiometric LST routinely exceeds shaded air temperature by 5\u00b0C to 11\u00b0C during peak midday summer."
+    }
+  ],
+  "taluka_rankings": [
+    {
+      "taluka": "Malegaon",
+      "cell_count": 334,
+      "mean_summer_lst_c": 44.39,
+      "max_summer_lst_c": 53.8,
+      "mean_air_temp_c": 39.54,
+      "mean_built_up_pct": 18.8,
+      "mean_ndvi": 0.235,
+      "mean_change_5yr_c": 0.79,
+      "heat_vulnerability": "Extreme"
+    },
+    {
+      "taluka": "Nandgaon",
+      "cell_count": 273,
+      "mean_summer_lst_c": 44.25,
+      "max_summer_lst_c": 52.38,
+      "mean_air_temp_c": 39.73,
+      "mean_built_up_pct": 12.4,
+      "mean_ndvi": 0.247,
+      "mean_change_5yr_c": 0.68,
+      "heat_vulnerability": "Extreme"
+    },
+    {
+      "taluka": "Yeola",
+      "cell_count": 231,
+      "mean_summer_lst_c": 43.11,
+      "max_summer_lst_c": 52.25,
+      "mean_air_temp_c": 38.88,
+      "mean_built_up_pct": 12.8,
+      "mean_ndvi": 0.251,
+      "mean_change_5yr_c": 0.66,
+      "heat_vulnerability": "High"
+    },
+    {
+      "taluka": "Nashik",
+      "cell_count": 171,
+      "mean_summer_lst_c": 42.71,
+      "max_summer_lst_c": 51.42,
+      "mean_air_temp_c": 36.42,
+      "mean_built_up_pct": 52.1,
+      "mean_ndvi": 0.195,
+      "mean_change_5yr_c": 1.45,
+      "heat_vulnerability": "High"
+    },
+    {
+      "taluka": "Chandwad",
+      "cell_count": 196,
+      "mean_summer_lst_c": 42.39,
+      "max_summer_lst_c": 49.87,
+      "mean_air_temp_c": 38.35,
+      "mean_built_up_pct": 12.0,
+      "mean_ndvi": 0.244,
+      "mean_change_5yr_c": 0.66,
+      "heat_vulnerability": "High"
+    },
+    {
+      "taluka": "Baglan (Satana)",
+      "cell_count": 284,
+      "mean_summer_lst_c": 42.38,
+      "max_summer_lst_c": 49.73,
+      "mean_air_temp_c": 38.45,
+      "mean_built_up_pct": 12.3,
+      "mean_ndvi": 0.248,
+      "mean_change_5yr_c": 0.66,
+      "heat_vulnerability": "High"
+    },
+    {
+      "taluka": "Deola",
+      "cell_count": 86,
+      "mean_summer_lst_c": 42.3,
+      "max_summer_lst_c": 49.26,
+      "mean_air_temp_c": 38.31,
+      "mean_built_up_pct": 12.4,
+      "mean_ndvi": 0.252,
+      "mean_change_5yr_c": 0.64,
+      "heat_vulnerability": "High"
+    },
+    {
+      "taluka": "Kalwan",
+      "cell_count": 239,
+      "mean_summer_lst_c": 41.1,
+      "max_summer_lst_c": 48.32,
+      "mean_air_temp_c": 37.5,
+      "mean_built_up_pct": 12.3,
+      "mean_ndvi": 0.255,
+      "mean_change_5yr_c": 0.69,
+      "heat_vulnerability": "Moderate"
+    },
+    {
+      "taluka": "Sinnar",
+      "cell_count": 270,
+      "mean_summer_lst_c": 41.05,
+      "max_summer_lst_c": 50.33,
+      "mean_air_temp_c": 37.16,
+      "mean_built_up_pct": 15.9,
+      "mean_ndvi": 0.252,
+      "mean_change_5yr_c": 0.74,
+      "heat_vulnerability": "Moderate"
+    },
+    {
+      "taluka": "Niphad",
+      "cell_count": 220,
+      "mean_summer_lst_c": 40.11,
+      "max_summer_lst_c": 47.96,
+      "mean_air_temp_c": 37.69,
+      "mean_built_up_pct": 13.2,
+      "mean_ndvi": 0.483,
+      "mean_change_5yr_c": 0.64,
+      "heat_vulnerability": "Moderate"
+    },
+    {
+      "taluka": "Dindori",
+      "cell_count": 215,
+      "mean_summer_lst_c": 39.4,
+      "max_summer_lst_c": 49.9,
+      "mean_air_temp_c": 36.9,
+      "mean_built_up_pct": 15.2,
+      "mean_ndvi": 0.466,
+      "mean_change_5yr_c": 0.69,
+      "heat_vulnerability": "Moderate"
+    },
+    {
+      "taluka": "Surgana",
+      "cell_count": 182,
+      "mean_summer_lst_c": 36.31,
+      "max_summer_lst_c": 44.2,
+      "mean_air_temp_c": 35.53,
+      "mean_built_up_pct": 8.0,
+      "mean_ndvi": 0.616,
+      "mean_change_5yr_c": 0.65,
+      "heat_vulnerability": "Low"
+    },
+    {
+      "taluka": "Igatpuri",
+      "cell_count": 142,
+      "mean_summer_lst_c": 35.72,
+      "max_summer_lst_c": 44.07,
+      "mean_air_temp_c": 35.1,
+      "mean_built_up_pct": 7.9,
+      "mean_ndvi": 0.633,
+      "mean_change_5yr_c": 0.68,
+      "heat_vulnerability": "Low"
+    },
+    {
+      "taluka": "Peth",
+      "cell_count": 236,
+      "mean_summer_lst_c": 35.04,
+      "max_summer_lst_c": 42.82,
+      "mean_air_temp_c": 34.46,
+      "mean_built_up_pct": 8.4,
+      "mean_ndvi": 0.619,
+      "mean_change_5yr_c": 0.64,
+      "heat_vulnerability": "Low"
+    },
+    {
+      "taluka": "Trimbakeshwar",
+      "cell_count": 175,
+      "mean_summer_lst_c": 35.01,
+      "max_summer_lst_c": 43.21,
+      "mean_air_temp_c": 34.34,
+      "mean_built_up_pct": 8.5,
+      "mean_ndvi": 0.608,
+      "mean_change_5yr_c": 0.65,
+      "heat_vulnerability": "Low"
+    }
+  ]
+}

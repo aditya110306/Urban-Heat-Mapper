@@ -1,0 +1,350 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Nashik",
+        "type": "Metropolitan/Industrial",
+        "urban": true,
+        "cell_count": 171,
+        "mean_summer_lst_c": 42.71,
+        "max_summer_lst_c": 51.42,
+        "mean_air_temp_c": 36.42,
+        "mean_built_up_pct": 52.1,
+        "mean_ndvi": 0.195,
+        "mean_change_5yr_c": 1.45,
+        "heat_vulnerability": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.7898,
+          19.9975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Malegaon",
+        "type": "Semi-Arid Urban Center",
+        "urban": true,
+        "cell_count": 334,
+        "mean_summer_lst_c": 44.39,
+        "max_summer_lst_c": 53.8,
+        "mean_air_temp_c": 39.54,
+        "mean_built_up_pct": 18.8,
+        "mean_ndvi": 0.235,
+        "mean_change_5yr_c": 0.79,
+        "heat_vulnerability": "Extreme"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.5288,
+          20.5539
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Sinnar",
+        "type": "Industrial/Dry Plateau",
+        "urban": false,
+        "cell_count": 270,
+        "mean_summer_lst_c": 41.05,
+        "max_summer_lst_c": 50.33,
+        "mean_air_temp_c": 37.16,
+        "mean_built_up_pct": 15.9,
+        "mean_ndvi": 0.252,
+        "mean_change_5yr_c": 0.74,
+        "heat_vulnerability": "Moderate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.9961,
+          19.8458
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Niphad",
+        "type": "Agricultural/Grape Belt",
+        "urban": false,
+        "cell_count": 220,
+        "mean_summer_lst_c": 40.11,
+        "max_summer_lst_c": 47.96,
+        "mean_air_temp_c": 37.69,
+        "mean_built_up_pct": 13.2,
+        "mean_ndvi": 0.483,
+        "mean_change_5yr_c": 0.64,
+        "heat_vulnerability": "Moderate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.1082,
+          20.0768
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Yeola",
+        "type": "Arid Agricultural Plain",
+        "urban": false,
+        "cell_count": 231,
+        "mean_summer_lst_c": 43.11,
+        "max_summer_lst_c": 52.25,
+        "mean_air_temp_c": 38.88,
+        "mean_built_up_pct": 12.8,
+        "mean_ndvi": 0.251,
+        "mean_change_5yr_c": 0.66,
+        "heat_vulnerability": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.4889,
+          20.0425
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Dindori",
+        "type": "Horticultural/Foothills",
+        "urban": false,
+        "cell_count": 215,
+        "mean_summer_lst_c": 39.4,
+        "max_summer_lst_c": 49.9,
+        "mean_air_temp_c": 36.9,
+        "mean_built_up_pct": 15.2,
+        "mean_ndvi": 0.466,
+        "mean_change_5yr_c": 0.69,
+        "heat_vulnerability": "Moderate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.8378,
+          20.2014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Igatpuri",
+        "type": "Western Ghats Crest (Cool/Highland)",
+        "urban": false,
+        "cell_count": 142,
+        "mean_summer_lst_c": 35.72,
+        "max_summer_lst_c": 44.07,
+        "mean_air_temp_c": 35.1,
+        "mean_built_up_pct": 7.9,
+        "mean_ndvi": 0.633,
+        "mean_change_5yr_c": 0.68,
+        "heat_vulnerability": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.5592,
+          19.6978
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Trimbakeshwar",
+        "type": "Western Ghats Sacred Forest/Ghats",
+        "urban": false,
+        "cell_count": 175,
+        "mean_summer_lst_c": 35.01,
+        "max_summer_lst_c": 43.21,
+        "mean_air_temp_c": 34.34,
+        "mean_built_up_pct": 8.5,
+        "mean_ndvi": 0.608,
+        "mean_change_5yr_c": 0.65,
+        "heat_vulnerability": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.5358,
+          19.9381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Kalwan",
+        "type": "Tribal/Hill Basin",
+        "urban": false,
+        "cell_count": 239,
+        "mean_summer_lst_c": 41.1,
+        "max_summer_lst_c": 48.32,
+        "mean_air_temp_c": 37.5,
+        "mean_built_up_pct": 12.3,
+        "mean_ndvi": 0.255,
+        "mean_change_5yr_c": 0.69,
+        "heat_vulnerability": "Moderate"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.9878,
+          20.4939
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Baglan (Satana)",
+        "type": "Northern Agricultural Plateau",
+        "urban": false,
+        "cell_count": 284,
+        "mean_summer_lst_c": 42.38,
+        "max_summer_lst_c": 49.73,
+        "mean_air_temp_c": 38.45,
+        "mean_built_up_pct": 12.3,
+        "mean_ndvi": 0.248,
+        "mean_change_5yr_c": 0.66,
+        "heat_vulnerability": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.2044,
+          20.5936
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Chandwad",
+        "type": "Central Ridge/Highland Pass",
+        "urban": false,
+        "cell_count": 196,
+        "mean_summer_lst_c": 42.39,
+        "max_summer_lst_c": 49.87,
+        "mean_air_temp_c": 38.35,
+        "mean_built_up_pct": 12.0,
+        "mean_ndvi": 0.244,
+        "mean_change_5yr_c": 0.66,
+        "heat_vulnerability": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.2417,
+          20.3292
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Deola",
+        "type": "Transitional Basin",
+        "urban": false,
+        "cell_count": 86,
+        "mean_summer_lst_c": 42.3,
+        "max_summer_lst_c": 49.26,
+        "mean_air_temp_c": 38.31,
+        "mean_built_up_pct": 12.4,
+        "mean_ndvi": 0.252,
+        "mean_change_5yr_c": 0.64,
+        "heat_vulnerability": "High"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.1869,
+          20.4681
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Nandgaon",
+        "type": "Eastern Rain Shadow Plain",
+        "urban": false,
+        "cell_count": 273,
+        "mean_summer_lst_c": 44.25,
+        "max_summer_lst_c": 52.38,
+        "mean_air_temp_c": 39.73,
+        "mean_built_up_pct": 12.4,
+        "mean_ndvi": 0.247,
+        "mean_change_5yr_c": 0.68,
+        "heat_vulnerability": "Extreme"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.6578,
+          20.3136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Surgana",
+        "type": "Dangs Bordering Forest",
+        "urban": false,
+        "cell_count": 182,
+        "mean_summer_lst_c": 36.31,
+        "max_summer_lst_c": 44.2,
+        "mean_air_temp_c": 35.53,
+        "mean_built_up_pct": 8.0,
+        "mean_ndvi": 0.616,
+        "mean_change_5yr_c": 0.65,
+        "heat_vulnerability": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.6186,
+          20.5661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "taluka": "Peth",
+        "type": "Forested Sahyadri Valley",
+        "urban": false,
+        "cell_count": 236,
+        "mean_summer_lst_c": 35.04,
+        "max_summer_lst_c": 42.82,
+        "mean_air_temp_c": 34.46,
+        "mean_built_up_pct": 8.4,
+        "mean_ndvi": 0.619,
+        "mean_change_5yr_c": 0.64,
+        "heat_vulnerability": "Low"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.5042,
+          20.2589
+        ]
+      }
+    }
+  ]
+}

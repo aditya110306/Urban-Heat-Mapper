@@ -1,0 +1,108 @@
+{
+  "project": "Urban Heat Mapper \u2014 Nashik District",
+  "geography": {
+    "country": "India",
+    "state": "Maharashtra",
+    "district": "Nashik",
+    "boundary_verified": true,
+    "source_authority": "Survey of India / India WRIS National Water Data Portal / GADM v4.1",
+    "census_id": 326,
+    "bounding_box": [
+      73.2594,
+      19.5864,
+      74.9412,
+      20.8662
+    ],
+    "area_km2": 15530
+  },
+  "datasets": [
+    {
+      "id": "admin_boundary",
+      "dataset_name": "Survey of India Administrative Boundaries (District Level)",
+      "provider": "Survey of India / National Water Data Portal",
+      "source_url": "https://indiawris.gov.in/",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "Vector boundary (1:50,000 scale)",
+      "time_coverage": "2024 Administrative Census Framework",
+      "units": "Polygonal coordinates (EPSG:4326 WGS84)",
+      "restrictions": "Open Government Data (OGD) Platform India",
+      "authentication": "Public download / No API key required"
+    },
+    {
+      "id": "landsat_thermal_lst",
+      "dataset_name": "Landsat 8 & 9 Collection 2 Level-2 Surface Temperature (TIRS Band 10)",
+      "provider": "USGS / NASA via Google Earth Engine & Planetary Computer STAC",
+      "source_url": "https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_L2",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "Native 100m thermal, resampled to 30m by USGS",
+      "time_coverage": "2019 - 2024 (Seasonal & Annual Composites)",
+      "units": "Degrees Celsius (\u00b0C)",
+      "calibration_formula": "LST (\u00b0C) = (DN * 0.00341802 + 149.0) - 273.15",
+      "cloud_masking": "QA_PIXEL bitmask (Cirrus, Dilated Cloud, Cloud, Cloud Shadow removed)",
+      "restrictions": "NASA/USGS Open Data Policy (Creative Commons CC0)",
+      "authentication": "GEE Service Account or USGS EarthExplorer login"
+    },
+    {
+      "id": "imd_weather_grid",
+      "dataset_name": "India Meteorological Department (IMD) Gridded Temperature & Rainfall",
+      "provider": "India Meteorological Department (IMD Pune / IMDWeb)",
+      "source_url": "https://www.imdpune.gov.in/cmpg/Griddata/Griddata.html",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "0.25\u00b0 x 0.25\u00b0 (~27 km grid cells)",
+      "time_coverage": "2019 - 2024 Daily & Seasonal Aggregations",
+      "units": "Air Temperature (\u00b0C), Rainfall (mm/year)",
+      "restrictions": "IMD Open Data for research and non-commercial public interest",
+      "critical_caveat": "Coarse 0.25\u00b0 resolution represents regional ambient air temperature (shaded 1.5m Stevenson screen) and CANNOT be interpreted as street-level microclimate.",
+      "authentication": "Direct registration at IMD Pune Web Portal"
+    },
+    {
+      "id": "sentinel_ndvi",
+      "dataset_name": "Copernicus Sentinel-2 Level-2A BOA Surface Reflectance",
+      "provider": "European Space Agency (ESA) via Copernicus Data Space / Planetary Computer",
+      "source_url": "https://dataspace.copernicus.eu/",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "10m native optical bands (B04 Red, B08 NIR)",
+      "time_coverage": "2019 - 2024 cloud-free composites",
+      "units": "Dimensionless Index (-1.0 to +1.0)",
+      "calibration_formula": "NDVI = (B08 - B04) / (B08 + B04)",
+      "restrictions": "Open and free access under EU Copernicus Data Policy",
+      "authentication": "Public Planetary Computer STAC / Copernicus CDSE key"
+    },
+    {
+      "id": "ghsl_built_up",
+      "dataset_name": "Global Human Settlement Layer (GHSL) Built-up & OSM Footprints",
+      "provider": "European Commission Joint Research Centre (JRC) & OpenStreetMap",
+      "source_url": "https://ghsl.jrc.ec.europa.eu/",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "10m / 100m raster and vector buildings",
+      "time_coverage": "2020 - 2024",
+      "units": "Impervious Built-Up Percentage (0% - 100%)",
+      "restrictions": "Open Data Commons Open Database License (ODbL) / CC BY 4.0",
+      "authentication": "Open access"
+    },
+    {
+      "id": "copernicus_dem",
+      "dataset_name": "Copernicus GLO-30 Digital Elevation Model",
+      "provider": "European Space Agency (ESA) / Airbus",
+      "source_url": "https://spacedata.copernicus.eu/",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "30m grid",
+      "time_coverage": "Static high-precision topography",
+      "units": "Meters above sea level (m)",
+      "restrictions": "Publicly accessible free DEM",
+      "authentication": "Open access"
+    },
+    {
+      "id": "worldpop_population",
+      "dataset_name": "WorldPop High-Resolution Gridded Population Density",
+      "provider": "WorldPop / University of Southampton / Census of India Projections",
+      "source_url": "https://www.worldpop.org/",
+      "date_accessed": "2026-10-26",
+      "spatial_resolution": "100m grid",
+      "time_coverage": "2024 Adjusted Projections",
+      "units": "Persons per square kilometer (people/km\u00b2)",
+      "restrictions": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "authentication": "Open access"
+    }
+  ]
+}
