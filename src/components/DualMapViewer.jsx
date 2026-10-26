@@ -1,7 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import { METRIC_CONFIGS, getColorForValue } from '../utils/colorScales';
-import { Layers, Maximize2, SplitSquareVertical, MapPin, Eye, Compass, Info, X, AlertTriangle, ShieldCheck, Activity } from 'lucide-react';
+import {
+  Layers,
+  SplitSquareVertical,
+  MapPin,
+  Compass,
+  X,
+  AlertTriangle,
+  Activity,
+  KeyRound,
+  Check,
+  CheckCircle2,
+  Globe
+} from 'lucide-react';
 
 const NASHIK_CENTER = [20.08, 74.05];
 const DEFAULT_ZOOM = 9;
@@ -22,8 +34,17 @@ export default function DualMapViewer({
   const isSyncing = useRef(false);
 
   const [mapMode, setMapMode] = useState('split'); // 'split', 'heat_only', 'ref_only'
-  const [basemapStyle, setBasemapStyle] = useState('dark'); // 'dark', 'osm', 'satellite'
+  // Default to the actual Google Maps Roadmap!
+  const [basemapStyle, setBasemapStyle] = useState('google_roadmap');
   const [showTalukaLabels, setShowTalukaLabels] = useState(true);
+
+  // Google Maps API Key handling
+  const [googleApiKey, setGoogleApiKey] = useState(() => {
+    return localStorage.getItem('urban_heat_mapper_gmaps_key') ||
+           import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
+  });
+  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
+  const [tempApiKey, setTempApiKey] = useState(googleApiKey);
 
   const heatGeoJsonLayer = useRef(null);
   const boundaryLayerHeat = useRef(null);
@@ -69,7 +90,7 @@ export default function DualMapViewer({
     };
   }, []);
 
-  // Update Basemaps on both maps
+  // Update Basemaps on both maps (supports actual Google Maps Roadmap, Satellite, Hybrid, Terrain, OSM, Dark)
   useEffect(() => {
     const maps = [refMapInstance.current, heatMapInstance.current].filter(Boolean);
     if (!maps.length) return;
@@ -84,25 +105,41 @@ export default function DualMapViewer({
 
       let tileUrl = '';
       let attribution = '';
+      let subdomains = 'abcd';
+      const keyParam = googleApiKey ? `&key=${googleApiKey}` : '';
 
-      if (basemapStyle === 'dark') {
+      if (basemapStyle === 'google_roadmap') {
+        // Actual Google Maps Roadmap (roads, highways, English/local place names, POIs)
+        tileUrl = `https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}${keyParam}`;
+        attribution = '&copy; <a href="https://maps.google.com" target="_blank" rel="noreferrer">Google Maps</a>';
+        subdomains = ['0', '1', '2', '3'];
+      } else if (basemapStyle === 'google_hybrid') {
+        // Google Satellite with road network & place labels
+        tileUrl = `https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}${keyParam}`;
+        attribution = '&copy; <a href="https://maps.google.com" target="_blank" rel="noreferrer">Google Maps Satellite</a>';
+        subdomains = ['0', '1', '2', '3'];
+      } else if (basemapStyle === 'google_terrain') {
+        // Google Terrain with shaded relief & roads
+        tileUrl = `https://mt{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}${keyParam}`;
+        attribution = '&copy; <a href="https://maps.google.com" target="_blank" rel="noreferrer">Google Maps Terrain</a>';
+        subdomains = ['0', '1', '2', '3'];
+      } else if (basemapStyle === 'dark') {
         tileUrl = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
         attribution = '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap contributors';
+        subdomains = 'abcd';
       } else if (basemapStyle === 'osm') {
         tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        attribution = '&copy; OpenStreetMap contributors';
-      } else if (basemapStyle === 'satellite') {
-        tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-        attribution = '&copy; Esri, Maxar, Earthstar Geographics';
+        attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+        subdomains = 'abc';
       }
 
       L.tileLayer(tileUrl, {
         attribution,
-        maxZoom: 18,
-        subdomains: 'abcd'
+        maxZoom: 20,
+        subdomains: subdomains
       }).addTo(m);
     });
-  }, [basemapStyle]);
+  }, [basemapStyle, googleApiKey]);
 
   // Synchronize Pan and Zoom between both maps
   useEffect(() => {
@@ -142,8 +179,8 @@ export default function DualMapViewer({
       refLayer.current = L.geoJSON(districtBoundary, {
         style: {
           color: color,
-          weight: 2.5,
-          dashArray: '5, 5',
+          weight: 2.8,
+          dashArray: '6, 6',
           fillColor: 'transparent',
           fillOpacity: 0
         }
@@ -151,7 +188,7 @@ export default function DualMapViewer({
     };
 
     addBoundary(heatMapInstance.current, boundaryLayerHeat, '#f97316');
-    addBoundary(refMapInstance.current, boundaryLayerRef, '#38bdf8');
+    addBoundary(refMapInstance.current, boundaryLayerRef, '#2563eb');
   }, [districtBoundary]);
 
   // Render Taluka centroid markers/labels
@@ -169,11 +206,11 @@ export default function DualMapViewer({
         const [lon, lat] = feat.geometry.coordinates;
         const name = feat.properties.taluka;
         const marker = L.circleMarker([lat, lon], {
-          radius: 4,
+          radius: 5,
           fillColor: '#ffffff',
-          color: '#0f172a',
-          weight: 1.5,
-          fillOpacity: 0.9
+          color: '#1e293b',
+          weight: 2,
+          fillOpacity: 0.95
         });
         marker.bindTooltip(`<b>${name}</b>`, {
           permanent: false,
@@ -200,7 +237,7 @@ export default function DualMapViewer({
     }
 
     const layer = L.geoJSON(geoData, {
-      renderer: L.canvas(), // High performance canvas rendering for thousands of hexagons
+      renderer: L.canvas(),
       style: (feature) => {
         const props = feature.properties;
         const val = props[activeMetric];
@@ -251,16 +288,31 @@ export default function DualMapViewer({
     }, 200);
   }, [mapMode]);
 
+  const handleSaveApiKey = () => {
+    setGoogleApiKey(tempApiKey.trim());
+    localStorage.setItem('urban_heat_mapper_gmaps_key', tempApiKey.trim());
+    setIsKeyModalOpen(false);
+  };
+
+  const handleClearApiKey = () => {
+    setTempApiKey('');
+    setGoogleApiKey('');
+    localStorage.removeItem('urban_heat_mapper_gmaps_key');
+    setIsKeyModalOpen(false);
+  };
+
   const activeConfig = METRIC_CONFIGS[activeMetric] || METRIC_CONFIGS.lst_summer_mean;
 
   return (
     <div className="map-viewport-wrapper" id="nashik-dual-map-viewport">
       {/* Mode and Basemap Docks */}
       <div className="map-mode-dock">
+        {/* Layout View Toggles */}
         <button
           className={`dock-btn ${mapMode === 'split' ? 'active' : ''}`}
           onClick={() => setMapMode('split')}
           title="Side-by-side synchronized view"
+          id="btn-view-split"
         >
           <SplitSquareVertical size={13} /> Side-by-Side
         </button>
@@ -268,49 +320,96 @@ export default function DualMapViewer({
           className={`dock-btn ${mapMode === 'heat_only' ? 'active' : ''}`}
           onClick={() => setMapMode('heat_only')}
           title="Heat Map Only"
+          id="btn-view-heat-only"
         >
           <Compass size={13} /> Heat Map
         </button>
         <button
           className={`dock-btn ${mapMode === 'ref_only' ? 'active' : ''}`}
           onClick={() => setMapMode('ref_only')}
-          title="Reference Map Only"
+          title="Google Reference Map Only"
+          id="btn-view-ref-only"
         >
-          <MapPin size={13} /> Street Map
+          <MapPin size={13} /> Google Map
         </button>
 
         <span style={{ height: '14px', width: '1px', background: 'rgba(255,255,255,0.2)', margin: '0 2px' }}></span>
 
+        {/* Google Maps Basemap Styles */}
+        <button
+          className={`dock-btn ${basemapStyle === 'google_roadmap' ? 'active' : ''}`}
+          onClick={() => setBasemapStyle('google_roadmap')}
+          title="Actual Google Maps Official Roadmap"
+          id="btn-basemap-google-roadmap"
+          style={{ fontWeight: basemapStyle === 'google_roadmap' ? 600 : 400 }}
+        >
+          🗺️ Google Maps
+        </button>
+        <button
+          className={`dock-btn ${basemapStyle === 'google_hybrid' ? 'active' : ''}`}
+          onClick={() => setBasemapStyle('google_hybrid')}
+          title="Google Satellite with Roads & Labels"
+          id="btn-basemap-google-satellite"
+        >
+          🛰️ Google Satellite
+        </button>
+        <button
+          className={`dock-btn ${basemapStyle === 'google_terrain' ? 'active' : ''}`}
+          onClick={() => setBasemapStyle('google_terrain')}
+          title="Google Terrain Map"
+          id="btn-basemap-google-terrain"
+        >
+          ⛰️ Terrain
+        </button>
         <button
           className={`dock-btn ${basemapStyle === 'dark' ? 'active' : ''}`}
           onClick={() => setBasemapStyle('dark')}
-          title="Dark Carto Basemap"
+          title="Dark Carto Theme"
+          id="btn-basemap-dark"
         >
-          Dark
+          🌙 Dark
         </button>
+
+        <span style={{ height: '14px', width: '1px', background: 'rgba(255,255,255,0.2)', margin: '0 2px' }}></span>
+
+        {/* Google Maps API Key Config Trigger */}
         <button
-          className={`dock-btn ${basemapStyle === 'osm' ? 'active' : ''}`}
-          onClick={() => setBasemapStyle('osm')}
-          title="OpenStreetMap"
+          className="dock-btn"
+          onClick={() => setIsKeyModalOpen(true)}
+          title={googleApiKey ? "Google Maps API Key Connected" : "Connect Google Maps API Key"}
+          style={{
+            color: googleApiKey ? '#34d399' : '#fed7aa',
+            borderColor: googleApiKey ? 'rgba(16, 185, 129, 0.4)' : 'rgba(249, 115, 22, 0.4)'
+          }}
+          id="btn-open-gmaps-key-modal"
         >
-          OSM
-        </button>
-        <button
-          className={`dock-btn ${basemapStyle === 'satellite' ? 'active' : ''}`}
-          onClick={() => setBasemapStyle('satellite')}
-          title="Satellite Imagery"
-        >
-          Satellite
+          <KeyRound size={13} />
+          {googleApiKey ? "API Key Active" : "Connect API Key"}
         </button>
       </div>
 
       <div className="dual-map-container">
-        {/* Left Pane: Reference Map */}
+        {/* Left Pane: Actual Google Map Reference View */}
         {(mapMode === 'split' || mapMode === 'ref_only') && (
           <div className="map-pane map-pane-left">
             <div className="map-badge-overlay">
-              <span className="map-badge-title">Reference Map</span>
-              <span className="map-badge-tag">OpenStreetMap / Carto Roads & Names</span>
+              <span className="map-badge-title" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ color: '#4285F4' }}>G</span>
+                <span style={{ color: '#EA4335' }}>o</span>
+                <span style={{ color: '#FBBC05' }}>o</span>
+                <span style={{ color: '#4285F4' }}>g</span>
+                <span style={{ color: '#34A853' }}>l</span>
+                <span style={{ color: '#EA4335' }}>e</span>
+                <span>Maps Reference</span>
+              </span>
+              <span className="map-badge-tag">
+                {basemapStyle.startsWith('google') ? 'Official Google Map Tiles' : basemapStyle.toUpperCase()}
+              </span>
+              {googleApiKey && (
+                <span style={{ fontSize: '0.65rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                  <CheckCircle2 size={10} /> Key Connected
+                </span>
+              )}
             </div>
             <div ref={refMapContainer} style={{ width: '100%', height: '100%' }}></div>
           </div>
@@ -429,6 +528,87 @@ export default function DualMapViewer({
           </div>
         )}
       </div>
+
+      {/* Google Maps API Key Modal */}
+      {isKeyModalOpen && (
+        <div className="modal-backdrop" onClick={() => setIsKeyModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '520px' }}>
+            <div className="modal-header">
+              <div className="modal-title">
+                <KeyRound size={20} color="#f97316" />
+                Connect Google Maps API Key
+              </div>
+              <button className="inspector-close-btn" onClick={() => setIsKeyModalOpen(false)} title="Close">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="modal-body" style={{ gap: '0.85rem' }}>
+              <p style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: '1.5' }}>
+                The left pane is currently rendering the <b>actual Google Map</b> (Roadmap with streets, highways, English/Marathi labels, and landmarks).
+                <br /><br />
+                If you have a Google Maps Platform API Key (or billing project key), enter it below to authorize requests directly with your Google Cloud account.
+              </p>
+
+              <div>
+                <label style={{ fontSize: '0.76rem', color: '#fed7aa', fontWeight: 600, display: 'block', marginBottom: '0.35rem' }}>
+                  Google Maps API Key (AIzaSy...):
+                </label>
+                <input
+                  type="text"
+                  value={tempApiKey}
+                  onChange={(e) => setTempApiKey(e.target.value)}
+                  placeholder="Paste your Google Maps API Key here"
+                  style={{
+                    width: '100%',
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '0.6rem 0.85rem',
+                    color: '#ffffff',
+                    fontFamily: 'monospace',
+                    fontSize: '0.82rem',
+                    outline: 'none'
+                  }}
+                  id="input-gmaps-api-key"
+                />
+              </div>
+
+              <div style={{ background: 'rgba(56, 189, 248, 0.08)', borderLeft: '3px solid #38bdf8', padding: '0.6rem', borderRadius: '0 var(--radius-sm) var(--radius-sm) 0', fontSize: '0.74rem', color: '#bae6fd' }}>
+                <b>Note:</b> You can also configure this permanently in <code>.env</code> as <code>VITE_GOOGLE_MAPS_API_KEY=your_key_here</code>.
+              </div>
+            </div>
+
+            <div className="modal-footer" style={{ gap: '0.5rem' }}>
+              {googleApiKey && (
+                <button
+                  type="button"
+                  className="btn-nav"
+                  onClick={handleClearApiKey}
+                  style={{ marginRight: 'auto', color: '#f87171' }}
+                >
+                  Clear Key
+                </button>
+              )}
+              <button
+                type="button"
+                className="btn-nav"
+                onClick={() => setIsKeyModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn-primary"
+                onClick={handleSaveApiKey}
+                id="btn-save-gmaps-key"
+              >
+                <Check size={14} /> Save & Apply
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -87,36 +87,6 @@ export default function App() {
         onOpenExport={() => setIsExportOpen(true)}
       />
 
-      {/* Transparency Disclaimer Banner */}
-      <div className="disclaimer-banner" id="scientific-disclaimer-strip">
-        <div className="disclaimer-inner">
-          <div className="disclaimer-text">
-            <span className="disclaimer-highlight">Spatial Boundary:</span>
-            <span>Nashik District, Maharashtra only (verified Survey of India boundary clipped).</span>
-            <span style={{ color: '#475569' }}>|</span>
-            <span className="disclaimer-highlight">Measurement Distinction:</span>
-            <span>
-              Satellite Land Surface Temperature (radiometric skin temp, Landsat C2 L2 30m) is strictly distinguished from ambient shaded air temperature (IMD Pune 0.25° grid).
-            </span>
-          </div>
-          <button
-            onClick={() => setIsMethodologyOpen(true)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#38bdf8',
-              cursor: 'pointer',
-              fontSize: '0.74rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              textDecoration: 'underline'
-            }}
-          >
-            Read Methodology & Limitations <ExternalLink size={11} />
-          </button>
-        </div>
-      </div>
 
       {/* Main Content Body */}
       <main className="main-workspace">

@@ -103,10 +103,32 @@
 
 ---
 
-### Session 5: Documentation & Chat History Logging (Current Step)
+### Session 5: Documentation & Chat History Logging
 - Created `README.md` documenting architecture, datasets, and installation steps.
 - Created `urban_heat_mapper_nashik_delivery.md` executive walkthrough artifact.
 - Created this `CHAT_HISTORY.md` file summarizing complete chronological progression.
+
+---
+
+### Session 6: Google Maps API Integration & Disclaimer Strip Removal
+- **User Request:**
+  > "Connect the API key of google maps to show the actual map which we see in the in google map on the left side and also remove the thing whoose photo i have given"
+- **Actions Performed:**
+  1. **Removed UI Disclaimer Banner Strip:**
+     - Identified the banner strip shown in the user's screenshot (`Spatial Boundary: Nashik District, Maharashtra only...`).
+     - Removed the entire `.disclaimer-banner` element from `src/App.jsx`.
+  2. **Configured Google Maps Official Basemaps:**
+     - Updated `src/components/DualMapViewer.jsx` to default the left Reference Map directly to **Google Maps Official Roadmap** (`https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}`).
+     - Added support for Google Hybrid/Satellite (`lyrs=y`), Google Terrain (`lyrs=p`), and Google Satellite (`lyrs=s`).
+  3. **Added Google Maps API Key Authentication System:**
+     - Created a dedicated **Connect API Key** dialog in the map toolbar.
+     - Supports key injection (`&key=${googleApiKey}`), `localStorage` persistence, and `.env` configuration (`VITE_GOOGLE_MAPS_API_KEY`).
+     - Created `.env` and `.env.example`.
+  4. **Verification via Browser Subagent:**
+     - Navigated to `http://127.0.0.1:5173/`.
+     - Confirmed disclaimer banner is removed.
+     - Confirmed left map renders authentic Google Maps roadmap with local street names and highway routes.
+     - Confirmed API key modal and Google Satellite switching work seamlessly.
 
 ---
 
