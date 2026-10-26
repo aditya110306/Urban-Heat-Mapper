@@ -321,14 +321,41 @@ export default function DualMapViewer({
                 <span>Maps Reference</span>
               </span>
               <span className="map-badge-tag">
-                {basemapStyle.startsWith('google') ? 'Official Google Map Tiles' : basemapStyle.toUpperCase()}
+                {basemapStyle === 'google_roadmap' ? 'Roadmap' : (basemapStyle === 'google_hybrid' ? 'Satellite View' : 'Terrain View')}
               </span>
-              {googleApiKey && (
-                <span style={{ fontSize: '0.65rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '2px' }}>
-                  <CheckCircle2 size={10} /> Key Connected
-                </span>
-              )}
             </div>
+
+            {/* Clean View Toggles: Map, Satellite, Terrain */}
+            <div className="google-view-selector" id="google-map-view-selector">
+              <button
+                type="button"
+                className={`view-pill-btn ${basemapStyle === 'google_roadmap' ? 'active' : ''}`}
+                onClick={() => setBasemapStyle('google_roadmap')}
+                title="Google Maps Official Roadmap"
+                id="btn-gmap-roadmap"
+              >
+                🗺️ Map
+              </button>
+              <button
+                type="button"
+                className={`view-pill-btn ${basemapStyle === 'google_hybrid' ? 'active' : ''}`}
+                onClick={() => setBasemapStyle('google_hybrid')}
+                title="Google Maps Satellite Imagery with Roads & Place Labels"
+                id="btn-gmap-satellite"
+              >
+                🛰️ Satellite
+              </button>
+              <button
+                type="button"
+                className={`view-pill-btn ${basemapStyle === 'google_terrain' ? 'active' : ''}`}
+                onClick={() => setBasemapStyle('google_terrain')}
+                title="Google Maps Topographic Terrain Relief"
+                id="btn-gmap-terrain"
+              >
+                ⛰️ Terrain
+              </button>
+            </div>
+
             <div ref={refMapContainer} style={{ width: '100%', height: '100%' }}></div>
           </div>
         )}

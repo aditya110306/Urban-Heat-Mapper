@@ -467,46 +467,48 @@ body {
   padding-left: 0.4rem;
 }
 
-/* Dual Map Mode Toggles Overlay */
-.map-mode-dock {
+/* Clean Google Maps View Selector (Map, Satellite, Terrain) */
+.google-view-selector {
   position: absolute;
   top: 14px;
   right: 16px;
-  z-index: 850;
-  background: rgba(14, 22, 38, 0.9);
+  z-index: 800;
+  background: rgba(14, 22, 38, 0.92);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  padding: 4px;
+  border-radius: var(--radius-md);
+  padding: 3px;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   box-shadow: var(--shadow-sm);
 }
 
-.dock-btn {
+.view-pill-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  padding: 0.3rem 0.65rem;
-  border-radius: var(--radius-full);
-  font-size: 0.74rem;
+  padding: 0.32rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
   font-weight: 500;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
   transition: all 0.2s ease;
 }
 
-.dock-btn:hover {
-  color: var(--text-main);
+.view-pill-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.dock-btn.active {
-  background: var(--surface-glass);
+.view-pill-btn.active {
+  background: linear-gradient(135deg, #ea580c, #c2410c);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.35);
 }
 
 /* Floating Thermal Legend Overlay */
