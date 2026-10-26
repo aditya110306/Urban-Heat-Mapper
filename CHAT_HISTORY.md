@@ -149,6 +149,18 @@
 
 ---
 
+### Session 9: GitHub Deployment to Main Branch
+- **User Request:**
+  > "Give me the code to push this on Github https://github.com/aditya110306/Urban-Heat-Mapper.git" -> "option 1"
+- **Actions Performed:**
+  1. Linked remote repository: `origin -> https://github.com/aditya110306/Urban-Heat-Mapper.git`.
+  2. Set default branch to `main`.
+  3. Ensured `.env` and Python cache files are safely excluded via `.gitignore`.
+  4. Executed `git push -u origin main --force` to deploy this complete, verified Urban Heat Mapper V1 release to GitHub.
+  5. Deployment confirmed: `+ a7277fe...5d4419a main -> main (forced update)`.
+
+---
+
 ## 🗂️ Complete File & Structure Inventory
 
 ```text
