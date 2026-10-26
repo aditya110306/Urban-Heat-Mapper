@@ -78,7 +78,7 @@ export default function DualMapViewer({
     const map = L.map(heatMapContainer.current, {
       center: NASHIK_CENTER,
       zoom: DEFAULT_ZOOM,
-      zoomControl: true,
+      zoomControl: false,
       preferCanvas: true
     });
 
@@ -305,88 +305,6 @@ export default function DualMapViewer({
 
   return (
     <div className="map-viewport-wrapper" id="nashik-dual-map-viewport">
-      {/* Mode and Basemap Docks */}
-      <div className="map-mode-dock">
-        {/* Layout View Toggles */}
-        <button
-          className={`dock-btn ${mapMode === 'split' ? 'active' : ''}`}
-          onClick={() => setMapMode('split')}
-          title="Side-by-side synchronized view"
-          id="btn-view-split"
-        >
-          <SplitSquareVertical size={13} /> Side-by-Side
-        </button>
-        <button
-          className={`dock-btn ${mapMode === 'heat_only' ? 'active' : ''}`}
-          onClick={() => setMapMode('heat_only')}
-          title="Heat Map Only"
-          id="btn-view-heat-only"
-        >
-          <Compass size={13} /> Heat Map
-        </button>
-        <button
-          className={`dock-btn ${mapMode === 'ref_only' ? 'active' : ''}`}
-          onClick={() => setMapMode('ref_only')}
-          title="Google Reference Map Only"
-          id="btn-view-ref-only"
-        >
-          <MapPin size={13} /> Google Map
-        </button>
-
-        <span style={{ height: '14px', width: '1px', background: 'rgba(255,255,255,0.2)', margin: '0 2px' }}></span>
-
-        {/* Google Maps Basemap Styles */}
-        <button
-          className={`dock-btn ${basemapStyle === 'google_roadmap' ? 'active' : ''}`}
-          onClick={() => setBasemapStyle('google_roadmap')}
-          title="Actual Google Maps Official Roadmap"
-          id="btn-basemap-google-roadmap"
-          style={{ fontWeight: basemapStyle === 'google_roadmap' ? 600 : 400 }}
-        >
-          🗺️ Google Maps
-        </button>
-        <button
-          className={`dock-btn ${basemapStyle === 'google_hybrid' ? 'active' : ''}`}
-          onClick={() => setBasemapStyle('google_hybrid')}
-          title="Google Satellite with Roads & Labels"
-          id="btn-basemap-google-satellite"
-        >
-          🛰️ Google Satellite
-        </button>
-        <button
-          className={`dock-btn ${basemapStyle === 'google_terrain' ? 'active' : ''}`}
-          onClick={() => setBasemapStyle('google_terrain')}
-          title="Google Terrain Map"
-          id="btn-basemap-google-terrain"
-        >
-          ⛰️ Terrain
-        </button>
-        <button
-          className={`dock-btn ${basemapStyle === 'dark' ? 'active' : ''}`}
-          onClick={() => setBasemapStyle('dark')}
-          title="Dark Carto Theme"
-          id="btn-basemap-dark"
-        >
-          🌙 Dark
-        </button>
-
-        <span style={{ height: '14px', width: '1px', background: 'rgba(255,255,255,0.2)', margin: '0 2px' }}></span>
-
-        {/* Google Maps API Key Config Trigger */}
-        <button
-          className="dock-btn"
-          onClick={() => setIsKeyModalOpen(true)}
-          title={googleApiKey ? "Google Maps API Key Connected" : "Connect Google Maps API Key"}
-          style={{
-            color: googleApiKey ? '#34d399' : '#fed7aa',
-            borderColor: googleApiKey ? 'rgba(16, 185, 129, 0.4)' : 'rgba(249, 115, 22, 0.4)'
-          }}
-          id="btn-open-gmaps-key-modal"
-        >
-          <KeyRound size={13} />
-          {googleApiKey ? "API Key Active" : "Connect API Key"}
-        </button>
-      </div>
 
       <div className="dual-map-container">
         {/* Left Pane: Actual Google Map Reference View */}
